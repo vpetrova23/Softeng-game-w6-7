@@ -33,7 +33,7 @@ class Entity:
         dichtbij_genoeg = self.distance_to(other) < self.radius + other.radius*0.2 
         return groot_genoeg and dichtbij_genoeg 
     
-    def update(self):
+    def move(self):
         # Update de positie of staat van de entiteit hier
         pass
 
