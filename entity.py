@@ -1,5 +1,5 @@
 import pygame
-from settings import PLAYER_START_RADIUS, GROWTH_RATE
+from settings import PLAYER_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Entity:
     def __init__(self, pos_x, pos_y, color, radius=PLAYER_START_RADIUS):
@@ -37,3 +37,14 @@ class Entity:
         # Update de positie of staat van de entiteit hier
         pass
 
+    def handle_borders(self):
+    # Zorg ervoor dat de speler binnen de schermranden blijft
+        if self.pos_x < self.radius:
+            self.pos_x = self.radius
+        elif self.pos_x > SCREEN_WIDTH - self.radius:
+            self.pos_x = SCREEN_WIDTH - self.radius
+
+        if self.pos_y < self.radius:
+            self.pos_y = self.radius
+        elif self.pos_y > SCREEN_HEIGHT - self.radius:
+            self.pos_y = SCREEN_HEIGHT - self.radius
