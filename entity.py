@@ -1,12 +1,13 @@
 import pygame
-from settings import PLAYER_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH
+from settings import PLAYER_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_START_SPEED, PLAYER_COLOR, SPEED_DECREASE_RATE
 
 class Entity:
-    def __init__(self, pos_x, pos_y, color, radius=PLAYER_START_RADIUS):
+    def __init__(self, pos_x, pos_y):
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.color = color
-        self.radius = radius
+        self.color = PLAYER_COLOR
+        self.radius = PLAYER_START_RADIUS
+        self.speed = PLAYER_START_SPEED
 
 
     def draw(self, surface):
@@ -48,3 +49,8 @@ class Entity:
             self.pos_y = self.radius
         elif self.pos_y > SCREEN_HEIGHT - self.radius:
             self.pos_y = SCREEN_HEIGHT - self.radius
+
+    def speed_decrease(self):
+        # Verminder de snelheid van de entity als die groter wordt
+        self.speed = PLAYER_START_SPEED / (1 + self.radius * SPEED_DECREASE_RATE)
+        
