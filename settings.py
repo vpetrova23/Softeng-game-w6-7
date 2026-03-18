@@ -15,16 +15,16 @@ GRID_COLOR = (220, 220, 220)
 
 # Speler instellingen
 # ---------------------------
-PLAYER_START_RADIUS = 40
-PLAYER_START_SPEED = 10
 PLAYER_COLOR = (255, 182, 193)
 
 # Enemy instellingen 
 # ---------------------------
-ENEMY_START_RADIUS = 30
-ENEMY_START_SPEED = 10
 ENEMY_COUNT = 10
 
+# Entity instellingen 
+# ---------------------------
+ENTITY_START_RADIUS = 30
+ENTITY_START_SPEED = 10
 
 # Voedsel instellingen
 # ---------------------------
