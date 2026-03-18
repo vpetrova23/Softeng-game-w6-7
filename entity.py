@@ -1,13 +1,13 @@
 import pygame
-from settings import PLAYER_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH, PLAYER_START_SPEED, PLAYER_COLOR, SPEED_DECREASE_RATE
+from settings import ENTITY_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH, ENTITY_START_SPEED, PLAYER_COLOR, SPEED_DECREASE_RATE
 
 class Entity:
     def __init__(self, pos_x, pos_y):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.color = PLAYER_COLOR
-        self.radius = PLAYER_START_RADIUS
-        self.speed = PLAYER_START_SPEED
+        self.radius = ENTITY_START_RADIUS
+        self.speed = ENTITY_START_SPEED
 
 
     def draw(self, surface):
@@ -22,10 +22,11 @@ class Entity:
     
     def eat_food(self, foods):
         # Controleer of deze entiteit voedsel kan eten
-        for food in foods:
+        for food in foods[:]:
             if self.distance_to(food) < self.radius + food.radius:
                 # Eet het voedsel en vergroot de radius
                 self.radius += GROWTH_RATE
+                self.speed_decrease()  # Verminder de snelheid na het eten
                 foods.remove(food)
 
     def can_eat_bot(self, other):
@@ -40,17 +41,10 @@ class Entity:
 
     def handle_borders(self):
     # Zorg ervoor dat de speler binnen de schermranden blijft
-        if self.pos_x < self.radius:
-            self.pos_x = self.radius
-        elif self.pos_x > SCREEN_WIDTH - self.radius:
-            self.pos_x = SCREEN_WIDTH - self.radius
-
-        if self.pos_y < self.radius:
-            self.pos_y = self.radius
-        elif self.pos_y > SCREEN_HEIGHT - self.radius:
-            self.pos_y = SCREEN_HEIGHT - self.radius
+        pass 
+    
 
     def speed_decrease(self):
         # Verminder de snelheid van de entity als die groter wordt
-        self.speed = PLAYER_START_SPEED / (1 + self.radius * SPEED_DECREASE_RATE)
+        self.speed = ENTITY_START_SPEED / (1 + self.radius * SPEED_DECREASE_RATE)
         
