@@ -31,7 +31,7 @@ class Food:
         self.vx = max(-max_snelheid, min(max_snelheid, self.vx))
         self.vy = max(-max_snelheid, min(max_snelheid, self.vy))
 
-        # werkelijke verplaatsing (snelheid * tijd)
+        # werkelijke verplaatsing update(snelheid * tijd)
         self.pos_x += self.vx * delta_tijd  
         self.pos_y += self.vy * delta_tijd
 

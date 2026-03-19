@@ -37,7 +37,7 @@ class Game:
 
 
     # Update wereld (enemies en voedsel)
-        self.world.update(delta_tijd)
+        self.world.update(delta_tijd, self.player)
         
         # Update camera om speler te volgen
         self.camera.update(self.player)
@@ -51,7 +51,7 @@ class Game:
                 self.game_over()
         
         # Respawn voedsel als nodig
-        if len(self.world.foods) < 50:
+        if len(self.world.foods) < 300:
             self.world.respawn_food()
     
     def draw(self):

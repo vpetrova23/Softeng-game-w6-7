@@ -5,7 +5,7 @@ import random
 import colorsys
 from settings import ENEMY_START_SPEED, ENEMY_CHASE_STRENGTH, ENEMY_START_VELOCITY_RANGE
 
-def random_kleur():
+def random_kleur(): # geeft random kleur aan enemies
     tint = random.random()
     verzadiging = random.uniform(0.78, 1.0)
     licht = random.uniform(0.92, 1.0)
@@ -23,9 +23,16 @@ class Enemy(Entity):
 
         
 
-    def move(self, delta_tijd, foods):
-        if foods:
+    def move(self, delta_tijd, foods, player):
+         # kies target(player of dichtsbijzijnde food)
+        if self.can_eat_bot(player):
+            target = player
+        elif foods:
             target = min(foods, key=lambda food: self.distance_to(food))
+        else:
+            target = None
+        # richting berekenen voor beide target-paden 
+        if target is not None:
             dx = target.pos_x - self.pos_x
             dy = target.pos_y - self.pos_y
             distance = math.hypot(dx, dy)
@@ -36,8 +43,12 @@ class Enemy(Entity):
 
                 self.vx = dx * self.speed * ENEMY_CHASE_STRENGTH
                 self.vy = dy * self.speed * ENEMY_CHASE_STRENGTH
-
-        # werkelijke verplaatsing (snelheid * tijd)
+        else:
+            # geen target: eventueel stilstaan
+            self.vx = 0.0
+            self.vy = 0.0
+            
+        # werkelijke verplaatsing update (snelheid * tijd)
         self.pos_x += self.vx * delta_tijd  
         self.pos_y += self.vy * delta_tijd 
 

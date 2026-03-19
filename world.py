@@ -34,7 +34,7 @@ class World:
         self.foods.append(food)
     
 
-    def update(self, delta_tijd):
+    def update(self, delta_tijd, player):
         """Update voedsel en enemies"""
         # Update voedsel beweging
         for food in self.foods:
@@ -42,7 +42,7 @@ class World:
         
         # Update enemies
         for enemy in self.enemies:
-            enemy.move(delta_tijd, self.foods)
+            enemy.move(delta_tijd, self.foods, player)
             enemy.eat_food(self.foods)
             enemy.handle_borders()
         
