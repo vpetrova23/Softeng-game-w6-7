@@ -1,7 +1,7 @@
 ## Softeng-game-w6-7
 
 # **Avar.io**
-![voorbeeld spel](./Home/Softeng-game-w6-7./avario.png)
+![voorbeeld spel](./Home/Softeng-game-w6-7/avario.png)
 
 ## **Introductie**
 
