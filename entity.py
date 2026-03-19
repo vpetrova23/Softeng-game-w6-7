@@ -1,12 +1,12 @@
 import pygame
-from settings import ENTITY_START_RADIUS, GROWTH_RATE, SCREEN_HEIGHT, SCREEN_WIDTH, ENTITY_START_SPEED, PLAYER_COLOR, SPEED_DECREASE_RATE
+from settings import ENTITY_START_RADIUS, GROWTH_RATE, ENTITY_START_SPEED, SPEED_DECREASE_RATE, EAT_RATIO, WORLD_HEIGHT, WORLD_WIDTH
 
 class Entity:
-    def __init__(self, pos_x, pos_y):
+    def __init__(self, pos_x, pos_y, color):
         self.pos_x = pos_x
         self.pos_y = pos_y
-        self.color = PLAYER_COLOR
-        self.radius = ENTITY_START_RADIUS
+        self.color = color
+        self.radius = ENTITY_START_RADIUS 
         self.speed = ENTITY_START_SPEED
 
 
@@ -31,7 +31,7 @@ class Entity:
 
     def can_eat_bot(self, other):
         # Controleer of deze entiteit een andere bot kan eten
-        groot_genoeg = self.radius > other.radius * 1.1
+        groot_genoeg = self.radius > other.radius * EAT_RATIO
         dichtbij_genoeg = self.distance_to(other) < self.radius + other.radius*0.2 
         return groot_genoeg and dichtbij_genoeg 
     
@@ -41,7 +41,19 @@ class Entity:
 
     def handle_borders(self):
     # Zorg ervoor dat de speler binnen de schermranden blijft
-        pass 
+        if self.pos_x < self.radius:
+            self.pos_x = self.radius
+            self.vx *= -1 #draait snelheid om bij botsing met rand
+        elif self.pos_x > WORLD_WIDTH - self.radius:
+            self.pos_x = WORLD_WIDTH - self.radius
+            self.vx *= -1 #draait snelheid om bij botsing met rand
+
+        if self.pos_y < self.radius:
+            self.pos_y = self.radius
+            self.vy *= -1 #draait snelheid om bij botsing met rand
+        elif self.pos_y > WORLD_HEIGHT - self.radius:
+            self.pos_y = WORLD_HEIGHT - self.radius
+            self.vy *= -1 #draait snelheid om bij botsing met rand
     
 
     def speed_decrease(self):

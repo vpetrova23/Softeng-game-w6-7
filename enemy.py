@@ -3,7 +3,7 @@ from entity import Entity
 import math 
 import random
 import colorsys
-from settings import ENEMY_START_SPEED, ENEMY_START_RADIUS
+from settings import ENTITY_START_RADIUS, WORLD_WIDTH, WORLD_HEIGHT, ENEMY_ACCEL_RANGE
 
 def random_kleur():
     tint = random.random()
@@ -14,17 +14,16 @@ def random_kleur():
 
 
 class Enemy(Entity):
-    def __init__(self, pos_x, pos_y):
-        super().__init__(pos_x, pos_y, color=random_kleur())
-        self.x = pos_x
-        self.y = pos_y
-
+    def __init__(self):
+        # Kies een willekeurige positie binnen de wereld
+        pos_x = random.randint(0, WORLD_WIDTH)
+        pos_y = random.randint(0, WORLD_HEIGHT)
+        super().__init__(pos_x, pos_y, color=random_kleur(), radius=ENTITY_START_RADIUS)
+        
 
     def move(self, delta_tijd):
-        self.vx += random.uniform(-20, 20) * delta_tijd
-        self.vy += random.uniform(-20, 20) * delta_tijd
-
-
+        self.vx += random.uniform(ENEMY_ACCEL_RANGE[0], ENEMY_ACCEL_RANGE[1]) * delta_tijd
+        self.vy += random.uniform(ENEMY_ACCEL_RANGE[0], ENEMY_ACCEL_RANGE[1]) * delta_tijd
 
         # werkelijke verplaatsing (snelheid * tijd)
         self.x += self.vx * delta_tijd  
