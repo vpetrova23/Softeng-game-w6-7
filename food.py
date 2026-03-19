@@ -1,7 +1,7 @@
 import random
 import pygame
 import colorsys
-from settings import WORLD_WIDTH, WORLD_HEIGHT, FOOD_RADIUS, FOOD_START_SNELHEID, FOOD_MOVE
+from settings import WORLD_WIDTH, WORLD_HEIGHT, FOOD_RADIUS, FOOD_ACCEL_RANGE, FOOD_MOVE
 
 # Hulpfunctie voor random pastelkleuren 
 
@@ -19,8 +19,8 @@ class Food:
         self.y = random.randint(0, WORLD_HEIGHT - 1)
         self.radius = FOOD_RADIUS
         self.color = random_pastel_kleur()
-        self.vx = random.uniform(FOOD_START_SNELHEID[0], FOOD_START_SNELHEID[1]) # geeft random startsnelheid
-        self.vy = random.uniform(FOOD_START_SNELHEID[0], FOOD_START_SNELHEID[1]) # geeft random startsnelheid
+        self.vx = random.uniform(FOOD_ACCEL_RANGE[0], FOOD_ACCEL_RANGE[1]) # geeft random startsnelheid
+        self.vy = random.uniform(FOOD_ACCEL_RANGE[0], FOOD_ACCEL_RANGE[1]) # geeft random startsnelheid
 
     # laat het voedsel random langzaam bewegen door de wereld
     def move(self, delta_tijd):
