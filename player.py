@@ -1,5 +1,5 @@
 from entity import Entity
-from settings import ENTITY_START_RADIUS, PLAYER_COLOR, WORLD_HEIGHT, WORLD_WIDTH
+from settings import ENTITY_START_RADIUS, PLAYER_COLOR, WORLD_HEIGHT, WORLD_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH
 import pygame
 import math
 
@@ -18,8 +18,8 @@ class Player(Entity):
         # Laat de speler de muis volgen
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        dx = mouse_x - self.pos_x
-        dy = mouse_y - self.pos_y
+        dx = mouse_x - SCREEN_WIDTH / 2  # Bereken de afstand van de muis tot het midden van het scherm
+        dy = mouse_y - SCREEN_HEIGHT / 2
 
         distance = math.hypot(dx, dy)
         if distance > 0:
@@ -28,8 +28,8 @@ class Player(Entity):
             dy /= distance
 
             # Beweeg met de huidige speed
-            self.pos_x += dx * self.speed
-            self.pos_y += dy * self.speed
+            self.vx = dx * self.speed
+            self.vy = dy * self.speed
         else:
             # als er geen beweging is, zet snelheid op 0
             self.vx = 0.0

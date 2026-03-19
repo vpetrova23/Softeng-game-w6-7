@@ -31,7 +31,7 @@ class Game:
         # Update speler
         self.player.move()
         self.player.eat_food(self.world.foods)
-        self.player.handle_borders()
+        
 
     # Update wereld (enemies en voedsel)
         self.world.update(delta_tijd)
