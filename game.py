@@ -17,6 +17,7 @@ class Game:
         self.player = Player()
         self.world = World()
         self.camera = Camera(self.player)
+        self.name_font = pygame.font.SysFont("arial", 18, bold=True)
 
     def handle_events(self):
         """Handel input af."""
@@ -60,6 +61,15 @@ class Game:
         
         # Teken speler via camera
         self.camera.draw_entity(self.screen, self.player)
+        
+        # Teken naam van speler
+        screen_x, screen_y = self.camera.get_screen_pos(self.player.pos_x, self.player.pos_y)
+
+        font_size = max(10, int(self.player.radius * 0.5)) # Pas fontgrootte aan op basis van radius
+        name_font = pygame.font.SysFont("arial", font_size, bold=True)
+        label = name_font.render(self.player.name, True, (20, 20, 20))
+        label_rect = label.get_rect(center=(int(screen_x), int(screen_y)))  
+        self.screen.blit(label, label_rect)
         
         pygame.display.flip()
 

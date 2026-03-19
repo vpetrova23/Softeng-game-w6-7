@@ -6,6 +6,7 @@ import math
 
 class Player(Entity):
     def __init__(self):
+        self.name = "Jij <3" # Om aan te tonen wie je bent 
         pos_x = WORLD_WIDTH // 2
         pos_y = WORLD_HEIGHT // 2
         super().__init__(pos_x, pos_y, color=PLAYER_COLOR)
