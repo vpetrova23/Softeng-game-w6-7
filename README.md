@@ -48,6 +48,8 @@ Game: hoofd class die de game loop beheert
 
 Camera: volgt de speler en past de weergave aan
 
+World: class die food en enemies beheert 
+
 #### *Auteurs*
 
 Ariana Myasnykova
