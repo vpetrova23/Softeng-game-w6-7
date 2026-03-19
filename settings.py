@@ -30,6 +30,8 @@ ENTITY_START_SPEED = 10
 # ---------------------------
 FOOD_RADIUS = 10
 FOOD_COUNT = 300
+FOOD_START_SNELHEID = (-25.0, 25.0)
+FOOD_MOVE = (-10.0, 10.0)
 
 # Spelregels
 # ---------------------------
