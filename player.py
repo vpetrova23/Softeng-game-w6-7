@@ -6,8 +6,8 @@ import math
 
 class Player(Entity):
     def __init__(self):
-        pos_x = WORLD_WIDTH / 2
-        pos_y = WORLD_HEIGHT / 2
+        pos_x = WORLD_WIDTH // 2
+        pos_y = WORLD_HEIGHT // 2
         super().__init__(pos_x, pos_y, color=PLAYER_COLOR, radius=ENTITY_START_RADIUS)
 
         # Start snelheid is 0 omdat de speler alleen beweegt als de muis beweegt

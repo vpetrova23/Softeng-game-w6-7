@@ -14,7 +14,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
         
-        self.player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.player = Player()
         self.world = World()
         self.camera = Camera(self.player)
 
