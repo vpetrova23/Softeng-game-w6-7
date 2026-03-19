@@ -15,7 +15,7 @@ class Player(Entity):
         self.vx = 0.0
         self.vy = 0.0  
 
-    def move(self):
+    def move(self, camera=None):
         # Laat de speler de muis volgen
         mouse_x, mouse_y = pygame.mouse.get_pos()
 

@@ -53,4 +53,4 @@ class Food:
             self.vy *= -1  # draait snelheid om bij botsing met rand
 
     def draw(self, surface):
-        pygame.draw.circle(surface, self.color, (float(self.x), float(self.y)), self.radius)
+        pygame.draw.circle(surface, self.color, (float(self.pos_x), float(self.pos_y)), self.radius)

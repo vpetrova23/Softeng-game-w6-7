@@ -21,8 +21,8 @@ PLAYER_COLOR = (255, 182, 193)
 # ---------------------------
 ENEMY_COUNT = 20
 ENEMY_SPAWN_MARGIN = 0
-ENEMY_ACCEL_RANGE = (-20.0, 20.0)
-ENEMY_START_VELOCITY_RANGE = (-15.0, 15.0)
+ENEMY_ACCEL_RANGE = (-30.0, 30.0)
+ENEMY_START_VELOCITY_RANGE = (-50.0, 50.0)
 
 # Entity instellingen 
 # ---------------------------

@@ -19,6 +19,7 @@ class Game:
         self.camera = Camera(self.player)
         self.name_font = pygame.font.SysFont("arial", 18, bold=True)
 
+        
     def handle_events(self):
         """Handel input af."""
         for event in pygame.event.get():
@@ -30,9 +31,10 @@ class Game:
         delta_tijd = self.clock.tick(FPS) / 1000.0
         
         # Update speler
-        self.player.move()
+        self.player.move(camera=self.camera)
         self.player.eat_food(self.world.foods)
-        
+        self.player.handle_borders()
+
 
     # Update wereld (enemies en voedsel)
         self.world.update(delta_tijd)
