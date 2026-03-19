@@ -39,8 +39,8 @@ class Camera:
         """Teken alle wereld-entiteiten (voedsel en enemies) met camera offset."""
         # Teken voedsel
         for food in world.foods:
-            if self.is_visible(food.x, food.y, food.radius):
-                screen_x, screen_y = self.get_screen_pos(food.x, food.y)
+            if self.is_visible(food.pos_x, food.pos_y, food.radius):
+                screen_x, screen_y = self.get_screen_pos(food.pos_x, food.pos_y)
                 pygame.draw.circle(surface, food.color, (int(screen_x), int(screen_y)), food.radius)
         
         # Teken enemies

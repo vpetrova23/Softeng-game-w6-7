@@ -8,11 +8,12 @@ class Entity:
         self.color = color
         self.radius = ENTITY_START_RADIUS 
         self.speed = ENTITY_START_SPEED
-
+        self.vx = 0.0
+        self.vy = 0.0
 
     def draw(self, surface):
         # teken entity als een cirkel
-        pygame.draw.circle(surface, self.color, (self.pos_x, self.pos_y), self.radius)
+        pygame.draw.circle(surface, self.color, (int(self.pos_x), int(self.pos_y)), self.radius)
 
     def distance_to(self, other):
         # Bereken de afstand tussen deze entiteit en een andere entiteit

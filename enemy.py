@@ -14,11 +14,11 @@ def random_kleur():
 
 
 class Enemy(Entity):
-    def __init__(self):
+    def __init__(self, pos_x, pos_y):
         # Kies een willekeurige positie binnen de wereld
-        pos_x = random.randint(0, WORLD_WIDTH)
-        pos_y = random.randint(0, WORLD_HEIGHT)
-        super().__init__(pos_x, pos_y, color=random_kleur(), radius=ENTITY_START_RADIUS)
+        super().__init__(pos_x, pos_y, color=random_kleur())
+        self.vx = random.uniform(-10, 10)
+        self.vy = random.uniform(-10, 10)
         
 
     def move(self, delta_tijd):
@@ -26,7 +26,7 @@ class Enemy(Entity):
         self.vy += random.uniform(ENEMY_ACCEL_RANGE[0], ENEMY_ACCEL_RANGE[1]) * delta_tijd
 
         # werkelijke verplaatsing (snelheid * tijd)
-        self.x += self.vx * delta_tijd  
-        self.y += self.vy * delta_tijd 
+        self.pos_x += self.vx * delta_tijd  
+        self.pos_y += self.vy * delta_tijd 
 
         self.handle_borders()  # Zorg ervoor dat voedsel binnen de wereld blijft

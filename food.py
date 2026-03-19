@@ -15,8 +15,8 @@ def random_pastel_kleur():
 
 class Food:
     def __init__(self):
-        self.x = random.randint(0, WORLD_WIDTH - 1)
-        self.y = random.randint(0, WORLD_HEIGHT - 1)
+        self.pos_x = random.randint(0, WORLD_WIDTH - 1)
+        self.pos_y = random.randint(0, WORLD_HEIGHT - 1)
         self.radius = FOOD_RADIUS
         self.color = random_pastel_kleur()
         self.vx = random.uniform(FOOD_ACCEL_RANGE[0], FOOD_ACCEL_RANGE[1]) # geeft random startsnelheid
@@ -32,26 +32,25 @@ class Food:
         self.vy = max(-max_snelheid, min(max_snelheid, self.vy))
 
         # werkelijke verplaatsing (snelheid * tijd)
-        self.x += self.vx * delta_tijd  
-        self.y += self.vy * delta_tijd 
+        self.pos_x += self.vx * delta_tijd  
+        self.pos_y += self.vy * delta_tijd
 
         self.handle_borders()  # Zorg ervoor dat voedsel binnen de wereld blijft
     
     def handle_borders(self):
-        if self.x < self.radius: # checkt linkerkant 
-            self.x = self.radius
-            self.vx *= -1 #draait snelheid om bij botsing met rand
-        elif self.x > WORLD_WIDTH - self.radius: # checkt rechterkant
-            self.x = WORLD_WIDTH - self.radius
-            self.vx *= -1 #draait snelheid om bij botsing met rand
-        
-        if self.y < self.radius: # checkt bovenkant
-            self.y = self.radius
-            self.vy *= -1 #draait snelheid om bij botsing met rand
-        elif self.y > WORLD_HEIGHT - self.radius: # checkt onderkant    
-            self.y = WORLD_HEIGHT - self.radius
-            self.vy *= -1 #draait snelheid om bij botsing met rand  
-        
-        
+        if self.pos_x < self.radius:  # checkt linkerkant
+            self.pos_x = self.radius
+            self.vx *= -1  # draait snelheid om bij botsing met rand
+        elif self.pos_x > WORLD_WIDTH - self.radius:  # checkt rechterkant
+            self.pos_x = WORLD_WIDTH - self.radius
+            self.vx *= -1  # draait snelheid om bij botsing met rand
+
+        if self.pos_y < self.radius:  # checkt bovenkant
+            self.pos_y = self.radius
+            self.vy *= -1  # draait snelheid om bij botsing met rand
+        elif self.pos_y > WORLD_HEIGHT - self.radius:  # checkt onderkant
+            self.pos_y = WORLD_HEIGHT - self.radius
+            self.vy *= -1  # draait snelheid om bij botsing met rand
+
     def draw(self, surface):
         pygame.draw.circle(surface, self.color, (float(self.x), float(self.y)), self.radius)
