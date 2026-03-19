@@ -1,13 +1,15 @@
 import pygame
-from settings import ENTITY_START_RADIUS, GROWTH_RATE, ENTITY_START_SPEED, SPEED_DECREASE_RATE, EAT_RATIO, WORLD_HEIGHT, WORLD_WIDTH
+from settings import ENTITY_START_RADIUS, GROWTH_RATE, ENEMY_START_SPEED, PLAYER_START_SPEED, SPEED_DECREASE_RATE, EAT_RATIO, WORLD_HEIGHT, WORLD_WIDTH
 
 class Entity:
-    def __init__(self, pos_x, pos_y, color):
+    def __init__(self, pos_x, pos_y, color, start_speed):
         self.pos_x = pos_x
         self.pos_y = pos_y
         self.color = color
         self.radius = ENTITY_START_RADIUS 
-        self.speed = ENTITY_START_SPEED
+
+        self.start_speed = start_speed
+        self.speed = start_speed 
         self.vx = 0.0
         self.vy = 0.0
 
@@ -59,5 +61,5 @@ class Entity:
 
     def speed_decrease(self):
         # Verminder de snelheid van de entity als die groter wordt
-        self.speed = ENTITY_START_SPEED / (1 + self.radius * SPEED_DECREASE_RATE)
+        self.speed = self.start_speed / (1 + self.radius * SPEED_DECREASE_RATE)
         

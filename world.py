@@ -42,7 +42,7 @@ class World:
         
         # Update enemies
         for enemy in self.enemies:
-            enemy.move(delta_tijd)
+            enemy.move(delta_tijd, self.foods)
             enemy.eat_food(self.foods)
             enemy.handle_borders()
         

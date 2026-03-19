@@ -1,5 +1,5 @@
 from entity import Entity
-from settings import ENTITY_START_RADIUS, PLAYER_COLOR, WORLD_HEIGHT, WORLD_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH
+from settings import PLAYER_START_SPEED, PLAYER_COLOR, WORLD_HEIGHT, WORLD_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH
 import pygame
 import math
 
@@ -9,8 +9,8 @@ class Player(Entity):
         self.name = "Jij <3" # Om aan te tonen wie je bent 
         pos_x = WORLD_WIDTH // 2
         pos_y = WORLD_HEIGHT // 2
-        super().__init__(pos_x, pos_y, color=PLAYER_COLOR)
-
+        super().__init__(pos_x, pos_y, color=PLAYER_COLOR, start_speed=PLAYER_START_SPEED)
+        self.speed = PLAYER_START_SPEED
         # Start snelheid is 0 omdat de speler alleen beweegt als de muis beweegt
         self.vx = 0.0
         self.vy = 0.0  
