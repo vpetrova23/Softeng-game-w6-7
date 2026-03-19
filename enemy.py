@@ -24,14 +24,20 @@ class Enemy(Entity):
         
 
     def move(self, delta_tijd, foods, player):
-         # kies target(player of dichtsbijzijnde food)
-        if self.can_eat_bot(player):
+        if self.can_see_bot(player):        # ziet speler en is groot genoeg: chase
             target = player
+            flee = False
+        elif player.can_see_bot(self):      # speler ziet enemy en is groot genoeg: vlucht
+            target = player
+            flee = True
         elif foods:
             target = min(foods, key=lambda food: self.distance_to(food))
+            flee = False
         else:
             target = None
-        # richting berekenen voor beide target-paden 
+            flee = False
+
+
         if target is not None:
             dx = target.pos_x - self.pos_x
             dy = target.pos_y - self.pos_y
@@ -39,17 +45,19 @@ class Enemy(Entity):
 
             if distance > 0:
                 dx /= distance
-                dy /= distance 
+                dy /= distance
 
-                self.vx = dx * self.speed * ENEMY_CHASE_STRENGTH
-                self.vy = dy * self.speed * ENEMY_CHASE_STRENGTH
+                if flee:
+                    # Beweeg WEG van de speler (richting omdraaien)
+                    self.vx = -dx * self.speed * ENEMY_CHASE_STRENGTH
+                    self.vy = -dy * self.speed * ENEMY_CHASE_STRENGTH
+                else:
+                    self.vx = dx * self.speed * ENEMY_CHASE_STRENGTH
+                    self.vy = dy * self.speed * ENEMY_CHASE_STRENGTH
         else:
-            # geen target: eventueel stilstaan
             self.vx = 0.0
             self.vy = 0.0
-            
-        # werkelijke verplaatsing update (snelheid * tijd)
-        self.pos_x += self.vx * delta_tijd  
-        self.pos_y += self.vy * delta_tijd 
 
-        self.handle_borders()  # Zorg ervoor dat voedsel binnen de wereld blijft
+        self.pos_x += self.vx * delta_tijd
+        self.pos_y += self.vy * delta_tijd
+        self.handle_borders()

@@ -38,6 +38,12 @@ class Entity:
         dichtbij_genoeg = self.distance_to(other) < self.radius + other.radius*0.2 
         return groot_genoeg and dichtbij_genoeg 
     
+    def can_see_bot(self, other, vision_range=400):
+        """Check of deze entity een andere entity kan 'zien' als potentieel target."""
+        groot_genoeg = self.radius > other.radius * EAT_RATIO
+        dichtbij_genoeg = self.distance_to(other) < vision_range
+        return groot_genoeg and dichtbij_genoeg
+    
     def move(self):
         # Update de positie of staat van de entiteit hier
         pass
